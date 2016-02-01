@@ -25,30 +25,21 @@ public class ChangeContent {
         this.instance = instance;
         this.stage = stage;
     }
-    /*
-    public Parent replaceSceneContent(String fxml) throws Exception {
-        Parent page = (Parent) FXMLLoader.load(instance.getClass().getResource(fxml), null, new JavaFXBuilderFactory());
-        Scene scene = stage.getScene();
-        if (scene == null) {
-            scene = new Scene(page);
-            stage.setScene(scene);
-        } else {
-            stage.getScene().setRoot(page);
-        }
-        stage.sizeToScene();
-        return page;
-    }
-    */
+
     public void replaceSceneContent(String fxml) throws Exception {
-        Parent page = (Parent) FXMLLoader.load(instance.getClass().getResource(fxml), null, new JavaFXBuilderFactory());
-        Scene scene = stage.getScene();
-        if (scene == null) {
-            scene = new Scene(page);
-            stage.setScene(scene);
-        } else {
-            stage.getScene().setRoot(page);
+        try {
+            Parent page = (Parent) FXMLLoader.load(instance.getClass().getResource(fxml), null, new JavaFXBuilderFactory());
+            Scene scene = stage.getScene();
+            if (scene == null) {
+                scene = new Scene(page);
+                stage.setScene(scene);
+            } else {
+                stage.getScene().setRoot(page);
+            }
+            stage.sizeToScene();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        stage.sizeToScene();
-        
+
     }
 }

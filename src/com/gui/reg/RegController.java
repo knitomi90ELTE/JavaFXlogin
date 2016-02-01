@@ -6,7 +6,12 @@
 package com.gui.reg;
 
 import com.LoginFX;
+import com.db.RegQuery;
+import com.entity.UserEntity;
+import com.security.PasswordHash;
 import java.net.URL;
+import java.security.NoSuchAlgorithmException;
+import java.security.spec.InvalidKeySpecException;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -46,6 +51,44 @@ public class RegController implements Initializable {
     }
     
     public void regAction(ActionEvent event){
+        if(nameField.getText().isEmpty()){
+            message.setText("Hiányzó adat: név");
+            return;
+        }
+        if(emailField.getText().isEmpty()){
+            message.setText("Hiányzó adat: email");
+            return;
+        }
+        if(pwd1Field.getText().isEmpty()){
+            message.setText("Hiányzó adat: jelszó");
+            return;
+        }
+        if(pwd2Field.getText().isEmpty()){
+            message.setText("Hiányzó adat: jelszó megint");
+            return;
+        }
+        if(!pwd1Field.getText().equals(pwd2Field.getText())){
+            message.setText("Jelszavak nem egyeznek");
+            return;
+        }
+        
+        RegQuery r = new RegQuery();
+        UserEntity u = new UserEntity();
+        u.setName(nameField.getText());
+        u.setEmail(emailField.getText());
+        try{
+            String pwd = PasswordHash.createHash(pwd1Field.getText());
+            u.setPassword(pwd);
+            r.addUser(u);
+            try{
+                LoginFX.getInstance().getChangeContent().replaceSceneContent("gui/admin/Admin.fxml");
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+            
+        }catch(NoSuchAlgorithmException | InvalidKeySpecException e){
+            e.printStackTrace();
+        }
         
     }
     

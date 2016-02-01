@@ -9,24 +9,17 @@ import com.LoginFX;
 import com.db.LoginQuery;
 import com.entity.UserEntity;
 import com.security.PasswordHash;
-import java.io.IOException;
 import java.net.URL;
 import java.security.NoSuchAlgorithmException;
 import java.security.spec.InvalidKeySpecException;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
-import javafx.scene.Node;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.scene.paint.Paint;
-import javafx.stage.Stage;
-
 /**
  *
  * @author capri
@@ -64,10 +57,16 @@ public class LoginController implements Initializable {
                 if(PasswordHash.validatePassword(password.getText(), current.getPassword())){
                     message.setTextFill(Paint.valueOf("00ff00"));
                     message.setText("Jelszó megfelelő!");
+                    try{
+                        changeToAdminAction();
+                    }catch(Exception e){
+                        e.printStackTrace();
+                    } 
                 }else{
                     message.setText("Hibás jelszó!");
                 }
             }catch(NoSuchAlgorithmException | InvalidKeySpecException e){
+                e.printStackTrace();
             }
         } else {
             message.setText("Email nem létezik!");
@@ -76,7 +75,11 @@ public class LoginController implements Initializable {
         
     }
     
-    public void changeToRegAction(ActionEvent event) throws IOException, Exception{
+    private void changeToAdminAction() throws Exception {
+        LoginFX.getInstance().getChangeContent().replaceSceneContent("gui/admin/Admin.fxml");
+    }
+    
+    public void changeToRegAction(ActionEvent event) throws Exception{
         LoginFX.getInstance().getChangeContent().replaceSceneContent("gui/reg/Reg.fxml");
     }
 

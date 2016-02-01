@@ -29,7 +29,8 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "UserEntity.findById", query = "SELECT u FROM UserEntity u WHERE u.id = :id"),
     @NamedQuery(name = "UserEntity.findByName", query = "SELECT u FROM UserEntity u WHERE u.name = :name"),
     @NamedQuery(name = "UserEntity.findByEmail", query = "SELECT u FROM UserEntity u WHERE u.email = :email"),
-    @NamedQuery(name = "UserEntity.findByPassword", query = "SELECT u FROM UserEntity u WHERE u.password = :password")})
+    @NamedQuery(name = "UserEntity.findByPassword", query = "SELECT u FROM UserEntity u WHERE u.password = :password")
+})
 public class UserEntity implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -113,18 +114,13 @@ public class UserEntity implements Serializable {
         }
         return true;
     }
-    /*
-    @Override
-    public String toString() {
-        return "com.entity.UserEntity[ id=" + id + " ]";
-    }
-    */
 
     @Override
     public String toString() {
         return "UserEntity{" + "id=" + id + ", name=" + name + ", email=" + email + '}';
     }
     
+    public static final String[] PROPERTY_NAMES = {"id","Név","Email"};
     
     
 }
