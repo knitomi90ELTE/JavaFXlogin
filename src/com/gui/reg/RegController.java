@@ -5,6 +5,7 @@
  */
 package com.gui.reg;
 
+import com.LoginFX;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -38,6 +39,10 @@ public class RegController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         // TODO
+    }
+    
+    public void backToLogin(ActionEvent event) throws Exception{
+        LoginFX.getInstance().getChangeContent().replaceSceneContent("gui/login/Login.fxml");
     }
     
     public void regAction(ActionEvent event){

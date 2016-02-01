@@ -77,10 +77,7 @@ public class LoginController implements Initializable {
     }
     
     public void changeToRegAction(ActionEvent event) throws IOException, Exception{
-        LoginFX app = LoginFX.getInstance();
-        app.getChangeContent().replaceSceneContent("gui/reg/Reg.fxml");
-        
-        
+        LoginFX.getInstance().getChangeContent().replaceSceneContent("gui/reg/Reg.fxml");
     }
 
 }
