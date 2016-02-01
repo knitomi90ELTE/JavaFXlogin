@@ -5,10 +5,8 @@
  */
 package com;
 
+import com.helper.ChangeContent;
 import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 /**
@@ -17,14 +15,28 @@ import javafx.stage.Stage;
  */
 public class LoginFX extends Application {
     
-    @Override
-    public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("gui/login/Login.fxml"));
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.show();
+    private static LoginFX instance;
+    private ChangeContent changeContent;
+    
+    public LoginFX() {
+        instance = this;
     }
 
+    public static LoginFX getInstance() {
+        return instance;
+    }
+
+    public ChangeContent getChangeContent() {
+        return changeContent;
+    }
+    
+    @Override
+    public void start(Stage stage) throws Exception {
+        changeContent = new ChangeContent(instance, stage);
+        changeContent.replaceSceneContent("gui/login/Login.fxml");
+        stage.show();
+    }
+    
     /**
      * @param args the command line arguments
      */
