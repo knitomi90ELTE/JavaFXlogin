@@ -7,12 +7,8 @@ package com.gui.admin;
 
 import com.db.TableQuery;
 import com.entity.UserEntity;
-import com.panemu.tiwulfx.common.TableData;
 import com.panemu.tiwulfx.table.TableControl;
-import com.panemu.tiwulfx.table.TableController;
-import com.panemu.tiwulfx.table.TextColumn;
 import java.net.URL;
-import java.util.List;
 import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;

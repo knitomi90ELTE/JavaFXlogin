@@ -18,15 +18,15 @@ import javafx.stage.Stage;
  */
 public class ChangeContent {
 
-    private LoginFX instance;
-    private Stage stage;
+    private final LoginFX instance;
+    private final Stage stage;
 
     public ChangeContent(LoginFX instance, Stage stage) {
         this.instance = instance;
         this.stage = stage;
     }
 
-    public void replaceSceneContent(String fxml) throws Exception {
+    public void replaceSceneContent(String fxml) {
         try {
             Parent page = (Parent) FXMLLoader.load(instance.getClass().getResource(fxml), null, new JavaFXBuilderFactory());
             Scene scene = stage.getScene();

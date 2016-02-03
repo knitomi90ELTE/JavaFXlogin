@@ -31,7 +31,7 @@ public class LoginFX extends Application {
     }
     
     @Override
-    public void start(Stage stage) throws Exception {
+    public void start(Stage stage) {
         changeContent = new ChangeContent(instance, stage);
         changeContent.replaceSceneContent("gui/login/Login.fxml");
         stage.show();
