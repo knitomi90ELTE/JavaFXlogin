@@ -21,12 +21,10 @@ public class DefaultDao<T extends PersistentEntity> implements GenericDao<T> {
 
     protected final Class<T> CLASS;
     protected final EntityManagerFactory EMF;
-    protected final EntityManager EM;
 
     public DefaultDao(Class<T> CLASS) {
         this.CLASS = CLASS;
         this.EMF = Persistence.createEntityManagerFactory("LoginFXPU");
-        this.EM = EMF.createEntityManager();
     }
 
     @Override

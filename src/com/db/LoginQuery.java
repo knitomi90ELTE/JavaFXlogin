@@ -7,6 +7,7 @@ package com.db;
 
 import com.entity.UserEntity;
 import java.util.List;
+import javax.persistence.EntityManager;
 import javax.persistence.NoResultException;
 
 /**
@@ -21,12 +22,14 @@ public class LoginQuery extends DefaultDao<UserEntity> {
     }
     
     public List<UserEntity> listLogin(){
-        return EM.createNamedQuery("UserEntity.findAll", UserEntity.class).getResultList();
+        EntityManager entityManager = getEntityManager();
+        return entityManager.createNamedQuery("UserEntity.findAll", UserEntity.class).getResultList();
     }
     
     public UserEntity findUser(String email){
         try{
-            return EM.createNamedQuery("UserEntity.findByEmail", UserEntity.class).setParameter("email", email).getSingleResult();
+            EntityManager entityManager = getEntityManager();
+            return entityManager.createNamedQuery("UserEntity.findByEmail", UserEntity.class).setParameter("email", email).getSingleResult();
         }catch(NoResultException e){
             return null;
         }
