@@ -11,9 +11,6 @@ import com.panemu.tiwulfx.common.TableData;
 import com.panemu.tiwulfx.table.TableController;
 import java.util.List;
 import javafx.scene.control.TableColumn;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 
 /**
  *
@@ -21,18 +18,15 @@ import javax.persistence.Persistence;
  */
 public class TableQuery extends TableController<UserEntity>{
     
-    EntityManager em;
-    EntityManagerFactory emf;
+    private DefaultDao<UserEntity> tableUserDao;
 
     public TableQuery() {
-        emf = Persistence.createEntityManagerFactory("LoginFXPU");
-        em = emf.createEntityManager();
-        em.getTransaction().begin();
+        
     }
     
     @Override
     public TableData<UserEntity> loadData(int i, List<TableCriteria> list, List<String> list1, List<TableColumn.SortType> list2, int i1) {
-        List<UserEntity> listUser = em.createNamedQuery("UserEntity.findAll", UserEntity.class).getResultList();
+        List<UserEntity> listUser = tableUserDao.findAll();
         return new TableData<>(listUser, false, listUser.size());
     }
     

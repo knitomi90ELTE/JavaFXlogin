@@ -6,27 +6,19 @@
 package com.db;
 
 import com.entity.UserEntity;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
 
 /**
  *
  * @author capri
  */
-public class RegQuery {
-    EntityManager em;
-    EntityManagerFactory emf;
+public class RegQuery extends DefaultDao<UserEntity> {
 
     public RegQuery() {
-        emf = Persistence.createEntityManagerFactory("LoginFXPU");
-        em = emf.createEntityManager();
-        em.getTransaction().begin();
+        super(UserEntity.class);
     }
     
     public void addUser(UserEntity user){
-        em.persist(user);
-        em.getTransaction().commit();
+        create(user);
     }
     
     

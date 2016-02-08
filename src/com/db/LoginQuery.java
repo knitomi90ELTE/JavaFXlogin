@@ -7,37 +7,30 @@ package com.db;
 
 import com.entity.UserEntity;
 import java.util.List;
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
 import javax.persistence.NoResultException;
-import javax.persistence.Persistence;
 
 /**
  *
  * @author capri
  */
-public class LoginQuery {
+public class LoginQuery extends DefaultDao<UserEntity> {
     
-    EntityManager em;
-    EntityManagerFactory emf;
-
+    
     public LoginQuery() {
-        emf = Persistence.createEntityManagerFactory("LoginFXPU");
-        em = emf.createEntityManager();
-        em.getTransaction().begin();
+        super(UserEntity.class);
     }
     
     public List<UserEntity> listLogin(){
-        return em.createNamedQuery("UserEntity.findAll", UserEntity.class).getResultList();
+        return EM.createNamedQuery("UserEntity.findAll", UserEntity.class).getResultList();
     }
     
     public UserEntity findUser(String email){
         try{
-            return em.createNamedQuery("UserEntity.findByEmail", UserEntity.class).setParameter("email", email).getSingleResult();
+            return EM.createNamedQuery("UserEntity.findByEmail", UserEntity.class).setParameter("email", email).getSingleResult();
         }catch(NoResultException e){
             return null;
         }
         
     }
-    
+  
 }

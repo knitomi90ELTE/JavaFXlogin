@@ -5,25 +5,18 @@
  */
 package com.entity;
 
-import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
-import javax.persistence.Table;
-import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author capri
  */
+
 @Entity
-@Table(name = "test2")
-@XmlRootElement
 @NamedQueries({
     @NamedQuery(name = "UserEntity.findAll", query = "SELECT u FROM UserEntity u"),
     @NamedQuery(name = "UserEntity.findById", query = "SELECT u FROM UserEntity u WHERE u.id = :id"),
@@ -31,14 +24,10 @@ import javax.xml.bind.annotation.XmlRootElement;
     @NamedQuery(name = "UserEntity.findByEmail", query = "SELECT u FROM UserEntity u WHERE u.email = :email"),
     @NamedQuery(name = "UserEntity.findByPassword", query = "SELECT u FROM UserEntity u WHERE u.password = :password")
 })
-public class UserEntity implements Serializable {
+public class UserEntity extends PersistentEntity {
 
     private static final long serialVersionUID = 1L;
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Basic(optional = false)
-    @Column(name = "id")
-    private Integer id;
+
     @Basic(optional = false)
     @Column(name = "name")
     private String name;
@@ -61,14 +50,6 @@ public class UserEntity implements Serializable {
         this.name = name;
         this.email = email;
         this.password = password;
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
     }
 
     public String getName() {
@@ -119,8 +100,41 @@ public class UserEntity implements Serializable {
     public String toString() {
         return "UserEntity{" + "id=" + id + ", name=" + name + ", email=" + email + '}';
     }
-    
-    public static final String[] PROPERTY_NAMES = {"id","Név","Email"};
-    
-    
+
+    public static final String[] PROPERTY_NAMES = {"id", "Név", "Email"};
+
+    @Override
+    public Object get(int columnIndex) {
+        switch(columnIndex){
+            case 0:
+                return id;
+            case 1:
+                return name;
+            case 2:
+                return email;
+            case 3:
+                return password;
+            default:
+                return null;
+        }
+    }
+
+    @Override
+    public void set(int columnIndex, Object value) {
+        switch(columnIndex){
+            case 0:
+                setId((Integer) value);
+                break;
+            case 1:
+                setName((String) value);
+                break;
+            case 2:
+                setEmail((String) value);
+                break;
+            case 3:
+                setPassword((String) value);
+                break;
+        }
+    }
+
 }
