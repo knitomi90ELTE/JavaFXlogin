@@ -20,10 +20,10 @@ import javafx.fxml.Initializable;
  */
 public class AdminController implements Initializable {
 
-    
     private TableQuery controller;
     @FXML
     private TableControl<UserEntity> tableControl;
+
     /**
      * Initializes the controller class.
      */
@@ -31,14 +31,13 @@ public class AdminController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         initTable();
     }
-    
-    private void initTable(){
-        
+
+    private void initTable() {
         controller = new TableQuery();
         tableControl.setController(controller);
         tableControl.setRecordClass(UserEntity.class);
         tableControl.reloadFirstPage();
-        
+
     }
-    
+
 }

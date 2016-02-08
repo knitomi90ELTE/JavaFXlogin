@@ -21,7 +21,7 @@ public class TableQuery extends TableController<UserEntity>{
     private DefaultDao<UserEntity> tableUserDao;
 
     public TableQuery() {
-        
+        tableUserDao = new DefaultDao<>(UserEntity.class);
     }
     
     @Override

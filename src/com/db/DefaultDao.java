@@ -19,12 +19,13 @@ import javax.persistence.criteria.CriteriaQuery;
  */
 public class DefaultDao<T extends PersistentEntity> implements GenericDao<T> {
 
+    private final boolean isRemote = true;
     protected final Class<T> CLASS;
     protected final EntityManagerFactory EMF;
 
     public DefaultDao(Class<T> CLASS) {
         this.CLASS = CLASS;
-        this.EMF = Persistence.createEntityManagerFactory("LoginFXPU");
+        this.EMF = isRemote ? Persistence.createEntityManagerFactory("LoginFXPU2") : Persistence.createEntityManagerFactory("LoginFXPU");
     }
 
     @Override
